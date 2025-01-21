@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    <h1>Bienvenido al Home</h1>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+
+    <h2>Tipo de Energía </h2>
+    <table>
+        <thead>
+            <tr>
+                <th>nivel Nombre</th>
+                <th>porcentake</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for energia in energias %}
+            <tr>
+                <td>{{ energia.nivel_nombre }}</td>
+                <td>${{ energia.porcentaje }}</td>
+                <td>{{ energia.fecha }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No hay registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
